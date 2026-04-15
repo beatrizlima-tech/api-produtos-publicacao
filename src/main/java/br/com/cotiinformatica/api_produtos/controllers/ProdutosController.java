@@ -1,6 +1,7 @@
 package br.com.cotiinformatica.api_produtos.controllers;
 
 import br.com.cotiinformatica.api_produtos.dtos.ProdutoRequestDto;
+import br.com.cotiinformatica.api_produtos.exceptions.ProdutoNaoEncontradoException;
 import br.com.cotiinformatica.api_produtos.services.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,14 +22,24 @@ public class ProdutosController {
 
     @PutMapping("{id}")
     public ResponseEntity<?> put(@PathVariable Integer id, @RequestBody ProdutoRequestDto request) {
-        var response = produtoService.atualizar(id, request);
-        return ResponseEntity.status(200).body(response);
+        try {
+            var response = produtoService.atualizar(id, request);
+            return ResponseEntity.status(200).body(response);
+        }
+        catch(ProdutoNaoEncontradoException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) {
-        var response = produtoService.excluir(id);
-        return ResponseEntity.status(200).body(response);
+        try {
+            var response = produtoService.excluir(id);
+            return ResponseEntity.status(200).body(response);
+        }
+        catch(ProdutoNaoEncontradoException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
 
     @GetMapping
@@ -39,7 +50,12 @@ public class ProdutosController {
 
     @GetMapping("{id}")
     public ResponseEntity<?> getById(@PathVariable Integer id) {
-        var response = produtoService.obterPorId(id);
-        return ResponseEntity.status(200).body(response);
+        try {
+            var response = produtoService.obterPorId(id);
+            return ResponseEntity.status(200).body(response);
+        }
+        catch(ProdutoNaoEncontradoException e) {
+            return ResponseEntity.status(404).body(e.getMessage());
+        }
     }
 }

@@ -3,6 +3,7 @@ package br.com.cotiinformatica.api_produtos.services;
 import br.com.cotiinformatica.api_produtos.dtos.ProdutoRequestDto;
 import br.com.cotiinformatica.api_produtos.dtos.ProdutoResponseDto;
 import br.com.cotiinformatica.api_produtos.entities.Produto;
+import br.com.cotiinformatica.api_produtos.exceptions.ProdutoNaoEncontradoException;
 import br.com.cotiinformatica.api_produtos.repositories.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +33,7 @@ public class ProdutoService {
     public ProdutoResponseDto atualizar(Integer id, ProdutoRequestDto request) {
 
         var produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado para edição."));
+                .orElseThrow(ProdutoNaoEncontradoException::new);
 
         produto.setNome(request.nome());
         produto.setPreco(BigDecimal.valueOf(request.preco()));
@@ -46,7 +47,7 @@ public class ProdutoService {
     public ProdutoResponseDto excluir(Integer id) {
 
         var produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado para exclusão."));
+                .orElseThrow(ProdutoNaoEncontradoException::new);
 
         produtoRepository.delete(produto);
 
@@ -66,7 +67,7 @@ public class ProdutoService {
     public ProdutoResponseDto obterPorId(Integer id) {
 
         var produto = produtoRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Produto não encontrado."));
+                .orElseThrow(ProdutoNaoEncontradoException::new);
 
         return toResponse(produto);
     }
