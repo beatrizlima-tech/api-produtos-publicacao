@@ -1,142 +1,141 @@
-# 🛒 API Produtos - Sistema de Gestão de Produtos
+# 📦 API Produtos
 
-![Java](https://img.shields.io/badge/Java-21-blue?logo=java)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.x-brightgreen?logo=springboot)
-![Maven](https://img.shields.io/badge/Maven-Build-red?logo=apachemaven)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?logo=postgresql)
-![Docker](https://img.shields.io/badge/Docker-Container-blue?logo=docker)
-![Status](https://img.shields.io/badge/build-passing-brightgreen)
-![License](https://img.shields.io/badge/license-Academic-lightgrey)
-
----
-
-API REST desenvolvida com **Java + Spring Boot** para gerenciamento completo de produtos, incluindo operações de CRUD, persistência em banco de dados PostgreSQL, testes automatizados e ambiente containerizado com Docker.
+![Java](https://img.shields.io/badge/Java-21-red?style=for-the-badge\&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-4.0.x-green?style=for-the-badge\&logo=springboot)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-blue?style=for-the-badge\&logo=postgresql)
+![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-green?style=for-the-badge\&logo=swagger)
+![Build](https://img.shields.io/badge/build-passing-brightgreen?style=for-the-badge)
+![License](https://img.shields.io/badge/license-MIT-lightgrey?style=for-the-badge)
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+# 📌 Sobre o projeto
 
-- Java 21  
-- Spring Boot  
-- Spring Web MVC  
-- Spring Data JPA  
-- PostgreSQL  
-- H2 Database (testes)  
-- Docker & Docker Compose  
-- Swagger / OpenAPI 3  
-- JUnit 5  
-- MockMvc  
-- Maven  
+A **API Produtos** é uma aplicação backend desenvolvida em **Java com Spring Boot** para gerenciamento de produtos através de uma API REST.
+
+O projeto foi desenvolvido para consolidar conhecimentos em construção de APIs, organização em camadas, integração com banco de dados PostgreSQL utilizando JDBC e documentação com Swagger/OpenAPI.
 
 ---
 
-## 📌 Funcionalidades
+# 🚀 Funcionalidades
 
-- Cadastro de produtos  
-- Atualização de produtos  
-- Exclusão de produtos  
-- Consulta de todos os produtos  
-- Consulta por ID  
-- Cálculo automático do valor total (preço × quantidade)  
-- Validação de dados  
-- Tratamento de exceções customizadas  
-- Testes automatizados de API  
-- Documentação interativa via Swagger  
+* Cadastro de produtos
+* Consulta de produtos por nome
+* Atualização de produtos *(em desenvolvimento)*
+* Exclusão de produtos *(em desenvolvimento)*
+* Cálculo automático do valor total (preço × quantidade)
+* Integração com PostgreSQL
+* Documentação da API com Swagger
 
 ---
 
-## 🏗️ Arquitetura do Projeto
+# 🧱 Tecnologias utilizadas
 
-- Controller → API REST  
-- Service → regras de negócio  
-- Repository → acesso ao banco de dados  
-- DTOs → transferência de dados  
-- Entity → modelagem do banco  
-- Exception → tratamento de erros  
-- Configuration → configurações gerais  
-
----
-
-## 📂 Estrutura do Projeto
-
-src/main/java/br/com/cotiinformatica/api_produtos
-
-controllers  
-services  
-repositories  
-entities  
-dtos  
-enums  
-exceptions  
-configurations  
-factories  
-sql  
+* Java 21
+* Spring Boot
+* Spring Web MVC
+* JDBC
+* PostgreSQL
+* Swagger / OpenAPI
+* Maven
 
 ---
 
-## ⚙️ Banco de Dados
+# 🏗️ Estrutura do projeto
 
-- PostgreSQL (produção)  
-- H2 (testes automatizados)  
+```
+src/main/java/br/com/cotiinformatica/produtos_api
 
----
-
-## 🧪 Testes Automatizados
-
-mvn test
-
-Testes cobrem:
-- CRUD completo
-- Validações
-- Integração com API
+├── configurations
+├── controllers
+├── dtos
+├── entities
+├── factories
+└── repositories
+```
 
 ---
 
-## 🐳 Executando com Docker
+# 🔗 Endpoints
 
-docker-compose up --build
-
-A aplicação ficará disponível em:
-
-http://localhost:8086
-
----
-
-## 📚 Swagger (Documentação da API)
-
-http://localhost:8086/swagger-ui.html
+| Método | Endpoint                 | Descrição                                |
+| ------ | ------------------------ | ---------------------------------------- |
+| POST   | /api/v1/produtos/criar   | Cadastrar produto                        |
+| GET    | /api/v1/produtos/listar  | Consultar produtos                       |
+| PUT    | /api/v1/produtos/alterar | Atualizar produto *(em desenvolvimento)* |
+| DELETE | /api/v1/produtos/excluir | Excluir produto *(em desenvolvimento)*   |
 
 ---
 
-## 🔗 Endpoints
+# ⚙️ Como executar o projeto
 
-POST    /api/v1/produtos  
-GET     /api/v1/produtos  
-GET     /api/v1/produtos/{id}  
-PUT     /api/v1/produtos/{id}  
-DELETE  /api/v1/produtos/{id}  
+### Clone o repositório
 
----
+```bash
+git clone https://github.com/beatrizlima-tech/produtos-api.git
+```
 
-## 💡 Diferenciais Técnicos
+### Configure o banco PostgreSQL
 
-- Arquitetura em camadas bem definida  
-- Uso de DTOs para desacoplamento  
-- Tratamento de exceções customizadas  
-- Integração com Docker  
-- Testes automatizados com MockMvc  
-- Documentação Swagger  
-- Boas práticas REST  
+Crie o banco de dados e execute o script SQL disponível no projeto.
 
----
+Configure a conexão na classe **ConnectionFactory**.
 
-## 👩‍💻 Autora
+### Execute a aplicação
 
-**Beatriz Lima**  
-Desenvolvedora Java Full Stack em formação, focada em backend e arquitetura de APIs.
+```bash
+mvn spring-boot:run
+```
 
 ---
 
-## 📌 Observação
+# 📚 Documentação
 
-Projeto acadêmico com foco em evolução para nível júnior backend developer.
+Após iniciar a aplicação, acesse:
+
+```
+http://localhost:8081/swagger-ui.html
+```
+
+---
+
+# 📊 Arquitetura
+
+Controller
+
+↓
+
+DTO
+
+↓
+
+Repository
+
+↓
+
+JDBC
+
+↓
+
+PostgreSQL
+
+---
+
+# 📌 Melhorias futuras
+
+* Implementar atualização completa de produtos
+* Implementar exclusão lógica
+* Adicionar camada de Service
+* Migrar para Spring Data JPA
+* Adicionar Bean Validation
+* Criar testes automatizados
+* Dockerizar a aplicação
+
+---
+
+# 👩‍💻 Autora
+
+Desenvolvido por **Beatriz Lima**
+
+* GitHub: https://github.com/beatrizlima-tech
+* LinkedIn: https://www.linkedin.com/in/beatrizlima-tech
